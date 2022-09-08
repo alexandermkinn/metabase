@@ -225,7 +225,7 @@
 (defmethod sql.qp/->honeysql [:oracle :get-second]
   [driver [_ arg]]
   (->> (sql.qp/->honeysql driver arg)
-       (hx/->timestamp v)
+       hx/->timestamp
        (hsql/call :extract :second)
        (hsql/call :floor)
        hx/->integer))
