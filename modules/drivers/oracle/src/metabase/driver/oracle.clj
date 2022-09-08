@@ -157,7 +157,6 @@
       ;; trunc() returns a date -- see https://docs.oracle.com/cd/E11882_01/server.112/e10729/ch4datetime.htm#NLSPG253
       (hx/with-database-type-info "date")))
 
-(defmethod sql.qp/date [:oracle :second-of-minute] [_ _ v] (hsql/call :extract :second (hx/->timestamp v)))
 (defmethod sql.qp/date [:oracle :minute]           [_ _ v] (trunc :mi v))
 ;; you can only extract minute + hour from TIMESTAMPs, even though DATEs still have them (WTF), so cast first
 (defmethod sql.qp/date [:oracle :minute-of-hour]   [_ _ v] (hsql/call :extract :minute (hx/->timestamp v)))
@@ -225,7 +224,11 @@
 
 (defmethod sql.qp/->honeysql [:oracle :get-second]
   [driver [_ arg]]
-  (sql.qp/date driver :second-of-minute (sql.qp/->honeysql driver arg)))
+  (->> (sql.qp/->honeysql driver arg)
+       (hx/->timestamp v)
+       (hsql/call :extract :second)
+       (hsql/call :floor)
+       hx/->integer))
 
 (def ^:private now (hsql/raw "SYSDATE"))
 
