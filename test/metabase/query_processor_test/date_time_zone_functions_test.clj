@@ -21,27 +21,24 @@
                                    :fields      fields})
          (mt/rows))))
 
-(mt/defdataset string-times
+(mt/defdataset many-times
   [["times" [{:field-name "index"
               :effective-type :type/Integer
               :base-type :type/Text}
              {:field-name "ts"
-              :base-type :type/Text
-              :effective-type :type/DateTime}
+              :base-type :type/DateTime}
              {:field-name "d"
-              :base-type :type/Text
-              :effective-type :type/Date}
+              :base-type :type/Date}
              {:field-name "t"
-              :base-type :type/Text
-              :effective-type :type/Time}]
-    [[1 "2004-02-19 09:19:09" "2004-02-19" "09:19:09"]
-     [2 "2008-06-20 10:20:10" "2008-06-20" "10:20:10"]
-     [3 "2012-11-21 11:21:11" "2012-11-21" "11:21:11"]
-     [4 "2012-11-21 11:21:11" "2012-11-21" "11:21:11"]]]])
+              :base-type :type/Time}]
+    [[1 #t "2004-02-19 09:19:09" #t "2004-02-19" #t "09:19:09"]
+     [2 #t "2008-06-20 10:20:10" #t "2008-06-20" #t "10:20:10"]
+     [3 #t "2012-11-21 11:21:11" #t "2012-11-21" #t "11:21:11"]
+     [4 #t "2012-11-21 11:21:11" #t "2012-11-21" #t "11:21:11"]]]])
 
 (t/deftest extraction-function-tests
-  (mt/test-drivers #{:postgres}
-    (mt/dataset string-times
+  (mt/test-drivers (mt/normal-drivers-with-feature :date-functions)
+    (mt/dataset many-times
       (doseq [[operation col-type & tests]
               [[:get-year
                 :timestamp
@@ -213,6 +210,6 @@
                  [:get-second [:field (mt/id :times :t) nil]]
                  {:aggregation [[:count]]
                   :breakout    [[:expression "expr"]]}]]]]
-       (doseq [[expected expr more-clauses] tests]
-         (t/testing (format "%s function works as expected on %s column" operation col-type)
+       (t/testing (format "%s function works as expected on %s column" operation col-type)
+         (doseq [[expected expr more-clauses] tests]
            (t/is (= expected (test-date-extract expr more-clauses)))))))))
