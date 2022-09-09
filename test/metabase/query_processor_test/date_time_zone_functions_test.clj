@@ -30,8 +30,8 @@
               :base-type :type/DateTime}
              {:field-name "d"
               :base-type :type/Date}
-             {:field-name "t"
-              :base-type :type/Time}
+             #_{:field-name "t"
+                :base-type :type/Time}
              {:field-name "as_dt"
               :base-type :type/Text
               :effective-type :type/DateTime
@@ -40,14 +40,18 @@
               :base-type :type/Text
               :effective-type :type/Date
               :coercion-strategy :Coercion/ISO8601->Date}
-             {:field-name "as_t"
-              :base-type :type/Text
-              :effective-type :type/Time
-              :coercion-strategy :Coercion/ISO8601->Time}]
-    [[1 #t "2004-02-19 09:19:09" #t "2004-02-19" #t "09:19:09" "2004-02-19 09:19:09" "2004-02-19" "09:19:09"]
-     [2 #t "2008-06-20 10:20:10" #t "2008-06-20" #t "10:20:10" "2008-06-20 10:20:10" "2008-06-20" "10:20:10"]
-     [3 #t "2012-11-21 11:21:11" #t "2012-11-21" #t "11:21:11" "2012-11-21 11:21:11" "2012-11-21" "11:21:11"]
-     [4 #t "2012-11-21 11:21:11" #t "2012-11-21" #t "11:21:11" "2012-11-21 11:21:11" "2012-11-21" "11:21:11"]]]])
+             #_{:field-name "as_t"
+                :base-type :type/Text
+                :effective-type :type/Time
+                :coercion-strategy :Coercion/ISO8601->Time}]
+    #_[[1 #t "2004-02-19 09:19:09" #t "2004-02-19" #t "09:19:09" "2004-02-19 09:19:09" "2004-02-19" "09:19:09"]
+       [2 #t "2008-06-20 10:20:10" #t "2008-06-20" #t "10:20:10" "2008-06-20 10:20:10" "2008-06-20" "10:20:10"]
+       [3 #t "2012-11-21 11:21:11" #t "2012-11-21" #t "11:21:11" "2012-11-21 11:21:11" "2012-11-21" "11:21:11"]
+       [4 #t "2012-11-21 11:21:11" #t "2012-11-21" #t "11:21:11" "2012-11-21 11:21:11" "2012-11-21" "11:21:11"]]
+    [[1 #t "2004-02-19 09:19:09" #t "2004-02-19" "2004-02-19 09:19:09" "2004-02-19"]
+     [2 #t "2008-06-20 10:20:10" #t "2008-06-20" "2008-06-20 10:20:10" "2008-06-20"]
+     [3 #t "2012-11-21 11:21:11" #t "2012-11-21" "2012-11-21 11:21:11" "2012-11-21"]
+     [4 #t "2012-11-21 11:21:11" #t "2012-11-21" "2012-11-21 11:21:11" "2012-11-21"]]]])
 
 (t/deftest extraction-function-tests
   (mt/test-drivers (mt/normal-drivers-with-feature :date-functions)
@@ -269,15 +273,15 @@
                  {:aggregation [[:count]]
                   :breakout    [[:expression "expr"]]}]]
 
-               [:get-hour
-                :time
-                :all
-                [[[9] [10] [11] [11]]
-                 [:get-hour [:field (mt/id :times :t) nil]]]
-                [[[9 1] [10 1] [11 2]]
-                 [:get-hour [:field (mt/id :times :t) nil]]
-                 {:aggregation [[:count]]
-                  :breakout    [[:expression "expr"]]}]]
+               #_[:get-hour
+                  :time
+                  :all
+                  [[[9] [10] [11] [11]]
+                   [:get-hour [:field (mt/id :times :t) nil]]]
+                  [[[9 1] [10 1] [11 2]]
+                   [:get-hour [:field (mt/id :times :t) nil]]
+                   {:aggregation [[:count]]
+                    :breakout    [[:expression "expr"]]}]]
 
                [:get-hour
                 :text-as-datetime
@@ -289,15 +293,15 @@
                  {:aggregation [[:count]]
                   :breakout    [[:expression "expr"]]}]]
 
-               [:get-hour
-                :text-as-time
-                :all
-                [[[9] [10] [11] [11]]
-                 [:get-hour [:field (mt/id :times :as_t) nil]]]
-                [[[9 1] [10 1] [11 2]]
-                 [:get-hour [:field (mt/id :times :as_t) nil]]
-                 {:aggregation [[:count]]
-                  :breakout    [[:expression "expr"]]}]]
+               #_[:get-hour
+                  :text-as-time
+                  :all
+                  [[[9] [10] [11] [11]]
+                   [:get-hour [:field (mt/id :times :as_t) nil]]]
+                  [[[9 1] [10 1] [11 2]]
+                   [:get-hour [:field (mt/id :times :as_t) nil]]
+                   {:aggregation [[:count]]
+                    :breakout    [[:expression "expr"]]}]]
 
                ;; get-minute
                [:get-minute
@@ -310,15 +314,15 @@
                  {:aggregation [[:count]]
                   :breakout    [[:expression "expr"]]}]]
 
-               [:get-minute
-                :time
-                :all
-                [[[19] [20] [21] [21]]
-                 [:get-minute [:field (mt/id :times :t) nil]]]
-                [[[19 1] [20 1] [21 2]]
-                 [:get-minute [:field (mt/id :times :t) nil]]
-                 {:aggregation [[:count]]
-                  :breakout    [[:expression "expr"]]}]]
+               #_[:get-minute
+                  :time
+                  :all
+                  [[[19] [20] [21] [21]]
+                   [:get-minute [:field (mt/id :times :t) nil]]]
+                  [[[19 1] [20 1] [21 2]]
+                   [:get-minute [:field (mt/id :times :t) nil]]
+                   {:aggregation [[:count]]
+                    :breakout    [[:expression "expr"]]}]]
 
                [:get-minute
                 :text-as-datetime
@@ -330,15 +334,15 @@
                  {:aggregation [[:count]]
                   :breakout    [[:expression "expr"]]}]]
 
-               [:get-minute
-                :text-as-time
-                :all
-                [[[19] [20] [21] [21]]
-                 [:get-minute [:field (mt/id :times :as_t) nil]]]
-                [[[19 1] [20 1] [21 2]]
-                 [:get-minute [:field (mt/id :times :as_t) nil]]
-                 {:aggregation [[:count]]
-                  :breakout    [[:expression "expr"]]}]]
+               #_[:get-minute
+                  :text-as-time
+                  :all
+                  [[[19] [20] [21] [21]]
+                   [:get-minute [:field (mt/id :times :as_t) nil]]]
+                  [[[19 1] [20 1] [21 2]]
+                   [:get-minute [:field (mt/id :times :as_t) nil]]
+                   {:aggregation [[:count]]
+                    :breakout    [[:expression "expr"]]}]]
 
                ;; get-second
                [:get-second
@@ -351,15 +355,15 @@
                  {:aggregation [[:count]]
                   :breakout    [[:expression "expr"]]}]]
 
-               [:get-second
-                :time
-                :all
-                [[[9] [10] [11] [11]]
-                 [:get-second [:field (mt/id :times :t) nil]]]
-                [[[9 1] [10 1] [11 2]]
-                 [:get-second [:field (mt/id :times :t) nil]]
-                 {:aggregation [[:count]]
-                  :breakout    [[:expression "expr"]]}]]
+               #_[:get-second
+                  :time
+                  :all
+                  [[[9] [10] [11] [11]]
+                   [:get-second [:field (mt/id :times :t) nil]]]
+                  [[[9 1] [10 1] [11 2]]
+                   [:get-second [:field (mt/id :times :t) nil]]
+                   {:aggregation [[:count]]
+                    :breakout    [[:expression "expr"]]}]]
 
                [:get-second
                 :text-as-datetime
@@ -371,15 +375,15 @@
                  {:aggregation [[:count]]
                   :breakout    [[:expression "expr"]]}]]
 
-               [:get-second
-                :text-as-time
-                :all
-                [[[9] [10] [11] [11]]
-                 [:get-second [:field (mt/id :times :as_t) nil]]]
-                [[[9 1] [10 1] [11 2]]
-                 [:get-second [:field (mt/id :times :as_t) nil]]
-                 {:aggregation [[:count]]
-                  :breakout    [[:expression "expr"]]}]]]]
+               #_[:get-second
+                  :text-as-time
+                  :all
+                  [[[9] [10] [11] [11]]
+                   [:get-second [:field (mt/id :times :as_t) nil]]]
+                  [[[9 1] [10 1] [11 2]]
+                   [:get-second [:field (mt/id :times :as_t) nil]]
+                   {:aggregation [[:count]]
+                    :breakout    [[:expression "expr"]]}]]]]
        (when (or (= drivers :all) (drivers driver/*driver*))
          (t/testing (format "%s function works as expected on %s column for driver %s" operation col-type drivers)
            (doseq [[expected expr more-clauses] tests]
