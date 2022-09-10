@@ -20,7 +20,7 @@
                                    :aggregation aggregation
                                    :limit       limit
                                    :fields      fields})
-         (mt/rows))))
+         (mt/formatted-rows [int]))))
 
 (mt/defdataset many-times
   [["times" [{:field-name "index"
@@ -387,4 +387,4 @@
        (when (or (= drivers :all) (drivers driver/*driver*))
          (t/testing (format "%s function works as expected on %s column for driver %s" operation col-type drivers)
            (doseq [[expected expr more-clauses] tests]
-             (t/is (= expected (test-date-extract expr more-clauses))))))))))
+             (t/is (= (set expected) (set (test-date-extract expr more-clauses)))))))))))
