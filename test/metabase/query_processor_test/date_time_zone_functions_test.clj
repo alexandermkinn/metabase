@@ -22,7 +22,7 @@
                                    :fields      fields})
          (mt/formatted-rows [int]))))
 
-(mt/defdataset many-times
+(mt/defdataset many-times-1
   [["times" [{:field-name "index"
               :effective-type :type/Integer
               :base-type :type/Text}
@@ -55,7 +55,7 @@
 
 (t/deftest extraction-function-tests
   (mt/test-drivers (mt/normal-drivers-with-feature :date-functions)
-    (mt/dataset many-times
+    (mt/dataset many-times-1
       (doseq [[operation col-type drivers & tests]
               ;; get-year
               [[:get-year
