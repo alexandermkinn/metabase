@@ -11,15 +11,15 @@
   [expr {:keys [aggregation breakout limit fields]
          :or   {fields [[:expression "expr"]]}}]
   (if breakout
-    (->> (mt/run-mbql-query times {:expressions {"expr" expr}
-                                   :aggregation aggregation
-                                   :limit       limit
-                                   :breakout    breakout})
+    (->> (mt/run-mbql-query many-times {:expressions {"expr" expr}
+                                        :aggregation aggregation
+                                        :limit       limit
+                                        :breakout    breakout})
          (mt/formatted-rows [int int]))
-    (->> (mt/run-mbql-query times {:expressions {"expr" expr}
-                                   :aggregation aggregation
-                                   :limit       limit
-                                   :fields      fields})
+    (->> (mt/run-mbql-query many-times {:expressions {"expr" expr}
+                                        :aggregation aggregation
+                                        :limit       limit
+                                        :fields      fields})
          (mt/formatted-rows [int]))))
 
 (mt/defdataset many-times-2
@@ -169,7 +169,7 @@
                  {:aggregation [[:count]]
                   :breakout    [[:expression "expr"]]}]]
 
-;; get-day
+               ;; get-day
                [:get-day
                 :datetime
                 #{}
@@ -210,7 +210,7 @@
                  {:aggregation [[:count]]
                   :breakout    [[:expression "expr"]]}]]
 
-;; get-day-of-week
+               ;; get-day-of-week
                [:get-day-of-week
                 :datetime
                 #{}
@@ -251,7 +251,7 @@
                  {:aggregation [[:count]]
                   :breakout    [[:expression "expr"]]}]]
 
-;; get-hour
+               ;; get-hour
                [:get-hour
                 :datetime
                 #{}
@@ -272,7 +272,7 @@
                  {:aggregation [[:count]]
                   :breakout    [[:expression "expr"]]}]]
 
-;; get-minute
+               ;; get-minute
                [:get-minute
                 :datetime
                 #{}
@@ -293,7 +293,7 @@
                  {:aggregation [[:count]]
                   :breakout    [[:expression "expr"]]}]]
 
-;; get-second
+               ;; get-second
                [:get-second
                 :datetime
                 #{}
