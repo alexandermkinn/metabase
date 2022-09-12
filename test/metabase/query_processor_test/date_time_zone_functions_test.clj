@@ -44,7 +44,7 @@
 
 (deftest extraction-function-tests
   (mt/test-drivers (mt/normal-drivers-with-feature :date-functions)
-   (mt/dataset test-data
+   (mt/dataset many-times-3
      (doseq [[operation col-type except-drivers & tests]
              ;; get-year
              [[:get-year
