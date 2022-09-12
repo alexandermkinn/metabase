@@ -35,9 +35,6 @@
                                           :sql-jdbc
                                           ::sql-jdbc.legacy/use-legacy-classes-for-read-and-set})
 
-(prefer-method sql.qp/cast-temporal-string [:presto-common :Coercion/ISO8601->DateTime] [:sql-jdbc :Coercion/ISO8601->DateTime])
-(prefer-method sql.qp/cast-temporal-string [:presto-common :Coercion/ISO8601->Date] [:sql-jdbc :Coercion/ISO8601->Date])
-
 ;;; +----------------------------------------------------------------------------------------------------------------+
 ;;; |                                          Custom HoneySQL Clause Impls                                          |
 ;;; +----------------------------------------------------------------------------------------------------------------+
