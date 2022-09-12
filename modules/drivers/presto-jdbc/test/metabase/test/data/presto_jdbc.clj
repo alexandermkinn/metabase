@@ -58,7 +58,7 @@
          :kerberos-keytab-path               (tx/db-test-env-var :presto-jdbc :kerberos-keytab-path nil)
          :kerberos-config-path               (tx/db-test-env-var :presto-jdbc :kerberos-config-path nil)
          :kerberos-service-principal-pattern (tx/db-test-env-var :presto-jdbc :kerberos-service-principal-pattern nil)
-         :catalog                            "test-data"
+         :catalog                            "test_data"
          :schema                             (tx/db-test-env-var :presto-jdbc :schema nil)}]
     (assoc base-details
            :ssl-use-keystore (every? some? (map base-details [:ssl-keystore-path :ssl-keystore-password-value]))
