@@ -22,7 +22,7 @@
                                         :fields      fields})
          (mt/formatted-rows [int]))))
 
-(mt/defdataset test-data
+(mt/defdataset many-times-3
   [["times" [{:field-name "index"
               :base-type :type/Integer}
              {:field-name "dt"
