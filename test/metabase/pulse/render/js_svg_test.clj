@@ -109,7 +109,7 @@
                                                #{"#text"}
                                                #(and (string? %)
                                                      ;; ["#text" "prefix0.00"]
-                                                     (re-matches #"prefix\d+\.\d{2}" %))))
+                                                     (re-matches #"prefix\d+(?:\.\d{1,2})?" %))))
                           :x-axis-labels (s/+ (s/tuple
                                                #{"#text"}
                                                #(and (string? %)
@@ -164,7 +164,7 @@
                                                #{"#text"}
                                                #(and (string? %)
                                                      ;; ["#text" "prefix0.0000"]
-                                                     (re-matches #"prefix\d+\.\d{4}" %))))
+                                                     (re-matches #"prefix\d+(?:\.\d{1,4})?" %))))
                           :x-axis-labels (s/+ (s/tuple
                                                #{"#text"}
                                                #(and (string? %)
