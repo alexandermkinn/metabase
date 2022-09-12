@@ -44,276 +44,276 @@
 
 (deftest extraction-function-tests
   (mt/test-drivers (mt/normal-drivers-with-feature :date-functions)
-   (mt/dataset many-times-2
-     (doseq [[operation col-type except-drivers & tests]
-             ;; get-year
-             [[:get-year
-               :datetime
-               #{}
-               [[[2004] [2008] [2012] [2012]]
-                [:get-year [:field (mt/id :times :dt) nil]]]
-               [[[2004 1] [2008 1] [2012 2]]
-                [:get-year [:field (mt/id :times :dt) nil]]
-                {:aggregation [[:count]]
-                 :breakout    [[:expression "expr"]]}]]
+    (mt/dataset many-times-2
+      (doseq [[operation col-type except-drivers & tests]
+              ;; get-year
+              [[:get-year
+                :datetime
+                #{}
+                [[[2004] [2008] [2012] [2012]]
+                 [:get-year [:field (mt/id :many-times :dt) nil]]]
+                [[[2004 1] [2008 1] [2012 2]]
+                 [:get-year [:field (mt/id :many-times :dt) nil]]
+                 {:aggregation [[:count]]
+                  :breakout    [[:expression "expr"]]}]]
 
-              [:get-year
-               :date
-               #{}
-               [[[2004] [2008] [2012] [2012]]
-                [:get-year [:field (mt/id :times :d) nil]]]
-               [[[2004 1] [2008 1] [2012 2]]
-                [:get-year [:field (mt/id :times :d) nil]]
-                {:aggregation [[:count]]
-                 :breakout    [[:expression "expr"]]}]]
+               [:get-year
+                :date
+                #{}
+                [[[2004] [2008] [2012] [2012]]
+                 [:get-year [:field (mt/id :many-times :d) nil]]]
+                [[[2004 1] [2008 1] [2012 2]]
+                 [:get-year [:field (mt/id :many-times :d) nil]]
+                 {:aggregation [[:count]]
+                  :breakout    [[:expression "expr"]]}]]
 
-              [:get-year
-               :text-as-datetime
-               #{:mongo}
-               [[[2004] [2008] [2012] [2012]]
-                [:get-year [:field (mt/id :times :as_dt) nil]]]
-               [[[2004 1] [2008 1] [2012 2]]
-                [:get-year [:field (mt/id :times :as_dt) nil]]
-                {:aggregation [[:count]]
-                 :breakout    [[:expression "expr"]]}]]
+               [:get-year
+                :text-as-datetime
+                #{:mongo}
+                [[[2004] [2008] [2012] [2012]]
+                 [:get-year [:field (mt/id :many-times :as_dt) nil]]]
+                [[[2004 1] [2008 1] [2012 2]]
+                 [:get-year [:field (mt/id :many-times :as_dt) nil]]
+                 {:aggregation [[:count]]
+                  :breakout    [[:expression "expr"]]}]]
 
-              [:get-year
-               :text-as-date
-               #{:mongo}
-               [[[2004] [2008] [2012] [2012]]
-                [:get-year [:field (mt/id :times :as_d) nil]]]
-               [[[2004 1] [2008 1] [2012 2]]
-                [:get-year [:field (mt/id :times :as_d) nil]]
-                {:aggregation [[:count]]
-                 :breakout    [[:expression "expr"]]}]]
+               [:get-year
+                :text-as-date
+                #{:mongo}
+                [[[2004] [2008] [2012] [2012]]
+                 [:get-year [:field (mt/id :many-times :as_d) nil]]]
+                [[[2004 1] [2008 1] [2012 2]]
+                 [:get-year [:field (mt/id :many-times :as_d) nil]]
+                 {:aggregation [[:count]]
+                  :breakout    [[:expression "expr"]]}]]
 
-              ;; get-quarter
-              [:get-quarter
-               :datetime
-               #{}
-               [[[1] [2] [4] [4]]
-                [:get-quarter [:field (mt/id :times :dt) nil]]]
-               [[[1 1] [2 1] [4 2]]
-                [:get-quarter [:field (mt/id :times :dt) nil]]
-                {:aggregation [[:count]]
-                 :breakout    [[:expression "expr"]]}]]
+               ;; get-quarter
+               [:get-quarter
+                :datetime
+                #{}
+                [[[1] [2] [4] [4]]
+                 [:get-quarter [:field (mt/id :many-times :dt) nil]]]
+                [[[1 1] [2 1] [4 2]]
+                 [:get-quarter [:field (mt/id :many-times :dt) nil]]
+                 {:aggregation [[:count]]
+                  :breakout    [[:expression "expr"]]}]]
 
-              [:get-quarter
-               :date
-               #{}
-               [[[1] [2] [4] [4]]
-                [:get-quarter [:field (mt/id :times :d) nil]]]
-               [[[1 1] [2 1] [4 2]]
-                [:get-quarter [:field (mt/id :times :d) nil]]
-                {:aggregation [[:count]]
-                 :breakout    [[:expression "expr"]]}]]
+               [:get-quarter
+                :date
+                #{}
+                [[[1] [2] [4] [4]]
+                 [:get-quarter [:field (mt/id :many-times :d) nil]]]
+                [[[1 1] [2 1] [4 2]]
+                 [:get-quarter [:field (mt/id :many-times :d) nil]]
+                 {:aggregation [[:count]]
+                  :breakout    [[:expression "expr"]]}]]
 
-              [:get-quarter
-               :text-as-datetime
-               #{:mongo}
-               [[[1] [2] [4] [4]]
-                [:get-quarter [:field (mt/id :times :as_dt) nil]]]
-               [[[1 1] [2 1] [4 2]]
-                [:get-quarter [:field (mt/id :times :as_dt) nil]]
-                {:aggregation [[:count]]
-                 :breakout    [[:expression "expr"]]}]]
+               [:get-quarter
+                :text-as-datetime
+                #{:mongo}
+                [[[1] [2] [4] [4]]
+                 [:get-quarter [:field (mt/id :many-times :as_dt) nil]]]
+                [[[1 1] [2 1] [4 2]]
+                 [:get-quarter [:field (mt/id :many-times :as_dt) nil]]
+                 {:aggregation [[:count]]
+                  :breakout    [[:expression "expr"]]}]]
 
-              [:get-quarter
-               :text-as-date
-               #{:mongo}
-               [[[1] [2] [4] [4]]
-                [:get-quarter [:field (mt/id :times :as_d) nil]]]
-               [[[1 1] [2 1] [4 2]]
-                [:get-quarter [:field (mt/id :times :as_d) nil]]
-                {:aggregation [[:count]]
-                 :breakout    [[:expression "expr"]]}]]
+               [:get-quarter
+                :text-as-date
+                #{:mongo}
+                [[[1] [2] [4] [4]]
+                 [:get-quarter [:field (mt/id :many-times :as_d) nil]]]
+                [[[1 1] [2 1] [4 2]]
+                 [:get-quarter [:field (mt/id :many-times :as_d) nil]]
+                 {:aggregation [[:count]]
+                  :breakout    [[:expression "expr"]]}]]
 
-              ;; get-month
-              [:get-month
-               :datetime
-               #{}
-               [[[2] [6] [11] [11]]
-                [:get-month [:field (mt/id :times :dt) nil]]]
-               [[[2 1] [6 1] [11 2]]
-                [:get-month [:field (mt/id :times :dt) nil]]
-                {:aggregation [[:count]]
-                 :breakout    [[:expression "expr"]]}]]
+               ;; get-month
+               [:get-month
+                :datetime
+                #{}
+                [[[2] [6] [11] [11]]
+                 [:get-month [:field (mt/id :many-times :dt) nil]]]
+                [[[2 1] [6 1] [11 2]]
+                 [:get-month [:field (mt/id :many-times :dt) nil]]
+                 {:aggregation [[:count]]
+                  :breakout    [[:expression "expr"]]}]]
 
-              [:get-month
-               :date
-               #{}
-               [[[2] [6] [11] [11]]
-                [:get-month [:field (mt/id :times :d) nil]]]
-               [[[2 1] [6 1] [11 2]]
-                [:get-month [:field (mt/id :times :d) nil]]
-                {:aggregation [[:count]]
-                 :breakout    [[:expression "expr"]]}]]
+               [:get-month
+                :date
+                #{}
+                [[[2] [6] [11] [11]]
+                 [:get-month [:field (mt/id :many-times :d) nil]]]
+                [[[2 1] [6 1] [11 2]]
+                 [:get-month [:field (mt/id :many-times :d) nil]]
+                 {:aggregation [[:count]]
+                  :breakout    [[:expression "expr"]]}]]
 
-              [:get-month
-               :text-as-datetime
-               #{:mongo}
-               [[[2] [6] [11] [11]]
-                [:get-month [:field (mt/id :times :as_dt) nil]]]
-               [[[2 1] [6 1] [11 2]]
-                [:get-month [:field (mt/id :times :as_dt) nil]]
-                {:aggregation [[:count]]
-                 :breakout    [[:expression "expr"]]}]]
+               [:get-month
+                :text-as-datetime
+                #{:mongo}
+                [[[2] [6] [11] [11]]
+                 [:get-month [:field (mt/id :many-times :as_dt) nil]]]
+                [[[2 1] [6 1] [11 2]]
+                 [:get-month [:field (mt/id :many-times :as_dt) nil]]
+                 {:aggregation [[:count]]
+                  :breakout    [[:expression "expr"]]}]]
 
-              [:get-month
-               :text-as-date
-               #{:mongo}
-               [[[2] [6] [11] [11]]
-                [:get-month [:field (mt/id :times :as_d) nil]]]
-               [[[2 1] [6 1] [11 2]]
-                [:get-month [:field (mt/id :times :as_d) nil]]
-                {:aggregation [[:count]]
-                 :breakout    [[:expression "expr"]]}]]
+               [:get-month
+                :text-as-date
+                #{:mongo}
+                [[[2] [6] [11] [11]]
+                 [:get-month [:field (mt/id :many-times :as_d) nil]]]
+                [[[2 1] [6 1] [11 2]]
+                 [:get-month [:field (mt/id :many-times :as_d) nil]]
+                 {:aggregation [[:count]]
+                  :breakout    [[:expression "expr"]]}]]
 
-              ;; get-day
-              [:get-day
-               :datetime
-               #{}
-               [[[19] [20] [21] [21]]
-                [:get-day [:field (mt/id :times :dt) nil]]]
-               [[[19 1] [20 1] [21 2]]
-                [:get-day [:field (mt/id :times :dt) nil]]
-                {:aggregation [[:count]]
-                 :breakout    [[:expression "expr"]]}]]
+;; get-day
+               [:get-day
+                :datetime
+                #{}
+                [[[19] [20] [21] [21]]
+                 [:get-day [:field (mt/id :many-times :dt) nil]]]
+                [[[19 1] [20 1] [21 2]]
+                 [:get-day [:field (mt/id :many-times :dt) nil]]
+                 {:aggregation [[:count]]
+                  :breakout    [[:expression "expr"]]}]]
 
-              [:get-day
-               :date
-               #{}
-               [[[19] [20] [21] [21]]
-                [:get-day [:field (mt/id :times :d) nil]]]
-               [[[19 1] [20 1] [21 2]]
-                [:get-day [:field (mt/id :times :d) nil]]
-                {:aggregation [[:count]]
-                 :breakout    [[:expression "expr"]]}]]
+               [:get-day
+                :date
+                #{}
+                [[[19] [20] [21] [21]]
+                 [:get-day [:field (mt/id :many-times :d) nil]]]
+                [[[19 1] [20 1] [21 2]]
+                 [:get-day [:field (mt/id :many-times :d) nil]]
+                 {:aggregation [[:count]]
+                  :breakout    [[:expression "expr"]]}]]
 
-              [:get-day
-               :text-as-datetime
-               #{:mongo}
-               [[[19] [20] [21] [21]]
-                [:get-day [:field (mt/id :times :as_dt) nil]]]
-               [[[19 1] [20 1] [21 2]]
-                [:get-day [:field (mt/id :times :as_dt) nil]]
-                {:aggregation [[:count]]
-                 :breakout    [[:expression "expr"]]}]]
+               [:get-day
+                :text-as-datetime
+                #{:mongo}
+                [[[19] [20] [21] [21]]
+                 [:get-day [:field (mt/id :many-times :as_dt) nil]]]
+                [[[19 1] [20 1] [21 2]]
+                 [:get-day [:field (mt/id :many-times :as_dt) nil]]
+                 {:aggregation [[:count]]
+                  :breakout    [[:expression "expr"]]}]]
 
-              [:get-day
-               :text-as-date
-               #{:mongo}
-               [[[19] [20] [21] [21]]
-                [:get-day [:field (mt/id :times :d) nil]]]
-               [[[19 1] [20 1] [21 2]]
-                [:get-day [:field (mt/id :times :d) nil]]
-                {:aggregation [[:count]]
-                 :breakout    [[:expression "expr"]]}]]
+               [:get-day
+                :text-as-date
+                #{:mongo}
+                [[[19] [20] [21] [21]]
+                 [:get-day [:field (mt/id :many-times :d) nil]]]
+                [[[19 1] [20 1] [21 2]]
+                 [:get-day [:field (mt/id :many-times :d) nil]]
+                 {:aggregation [[:count]]
+                  :breakout    [[:expression "expr"]]}]]
 
-              ;; get-day-of-week
-              [:get-day-of-week
-               :datetime
-               #{}
-               [[[5] [6] [4] [4]]
-                [:get-day-of-week [:field (mt/id :times :dt) nil]]]
-               [[[4 2] [5 1] [6 1]]
-                [:get-day-of-week [:field (mt/id :times :dt) nil]]
-                {:aggregation [[:count]]
-                 :breakout    [[:expression "expr"]]}]]
+;; get-day-of-week
+               [:get-day-of-week
+                :datetime
+                #{}
+                [[[5] [6] [4] [4]]
+                 [:get-day-of-week [:field (mt/id :many-times :dt) nil]]]
+                [[[4 2] [5 1] [6 1]]
+                 [:get-day-of-week [:field (mt/id :many-times :dt) nil]]
+                 {:aggregation [[:count]]
+                  :breakout    [[:expression "expr"]]}]]
 
-              [:get-day-of-week
-               :date
-               #{}
-               [[[5] [6] [4] [4]]
-                [:get-day-of-week [:field (mt/id :times :d) nil]]]
-               [[[4 2] [5 1] [6 1]]
-                [:get-day-of-week [:field (mt/id :times :d) nil]]
-                {:aggregation [[:count]]
-                 :breakout    [[:expression "expr"]]}]]
+               [:get-day-of-week
+                :date
+                #{}
+                [[[5] [6] [4] [4]]
+                 [:get-day-of-week [:field (mt/id :many-times :d) nil]]]
+                [[[4 2] [5 1] [6 1]]
+                 [:get-day-of-week [:field (mt/id :many-times :d) nil]]
+                 {:aggregation [[:count]]
+                  :breakout    [[:expression "expr"]]}]]
 
-              [:get-day-of-week
-               :text-as-datetime
-               #{:mongo}
-               [[[5] [6] [4] [4]]
-                [:get-day-of-week [:field (mt/id :times :as_dt) nil]]]
-               [[[4 2] [5 1] [6 1]]
-                [:get-day-of-week [:field (mt/id :times :as_dt) nil]]
-                {:aggregation [[:count]]
-                 :breakout    [[:expression "expr"]]}]]
+               [:get-day-of-week
+                :text-as-datetime
+                #{:mongo}
+                [[[5] [6] [4] [4]]
+                 [:get-day-of-week [:field (mt/id :many-times :as_dt) nil]]]
+                [[[4 2] [5 1] [6 1]]
+                 [:get-day-of-week [:field (mt/id :many-times :as_dt) nil]]
+                 {:aggregation [[:count]]
+                  :breakout    [[:expression "expr"]]}]]
 
-              [:get-day-of-week
-               :text-as-date
-               #{:mongo}
-               [[[5] [6] [4] [4]]
-                [:get-day-of-week [:field (mt/id :times :as_d) nil]]]
-               [[[4 2] [5 1] [6 1]]
-                [:get-day-of-week [:field (mt/id :times :as_d) nil]]
-                {:aggregation [[:count]]
-                 :breakout    [[:expression "expr"]]}]]
+               [:get-day-of-week
+                :text-as-date
+                #{:mongo}
+                [[[5] [6] [4] [4]]
+                 [:get-day-of-week [:field (mt/id :many-times :as_d) nil]]]
+                [[[4 2] [5 1] [6 1]]
+                 [:get-day-of-week [:field (mt/id :many-times :as_d) nil]]
+                 {:aggregation [[:count]]
+                  :breakout    [[:expression "expr"]]}]]
 
-              ;; get-hour
-              [:get-hour
-               :datetime
-               #{}
-               [[[9] [10] [11] [11]]
-                [:get-hour [:field (mt/id :times :dt) nil]]]
-               [[[9 1] [10 1] [11 2]]
-                [:get-hour [:field (mt/id :times :dt) nil]]
-                {:aggregation [[:count]]
-                 :breakout    [[:expression "expr"]]}]]
+;; get-hour
+               [:get-hour
+                :datetime
+                #{}
+                [[[9] [10] [11] [11]]
+                 [:get-hour [:field (mt/id :many-times :dt) nil]]]
+                [[[9 1] [10 1] [11 2]]
+                 [:get-hour [:field (mt/id :many-times :dt) nil]]
+                 {:aggregation [[:count]]
+                  :breakout    [[:expression "expr"]]}]]
 
-              [:get-hour
-               :text-as-datetime
-               #{:mongo}
-               [[[9] [10] [11] [11]]
-                [:get-hour [:field (mt/id :times :as_dt) nil]]]
-               [[[9 1] [10 1] [11 2]]
-                [:get-hour [:field (mt/id :times :as_dt) nil]]
-                {:aggregation [[:count]]
-                 :breakout    [[:expression "expr"]]}]]
+               [:get-hour
+                :text-as-datetime
+                #{:mongo}
+                [[[9] [10] [11] [11]]
+                 [:get-hour [:field (mt/id :many-times :as_dt) nil]]]
+                [[[9 1] [10 1] [11 2]]
+                 [:get-hour [:field (mt/id :many-times :as_dt) nil]]
+                 {:aggregation [[:count]]
+                  :breakout    [[:expression "expr"]]}]]
 
-              ;; get-minute
-              [:get-minute
-               :datetime
-               #{}
-               [[[19] [20] [21] [21]]
-                [:get-minute [:field (mt/id :times :dt) nil]]]
-               [[[19 1] [20 1] [21 2]]
-                [:get-minute [:field (mt/id :times :dt) nil]]
-                {:aggregation [[:count]]
-                 :breakout    [[:expression "expr"]]}]]
+;; get-minute
+               [:get-minute
+                :datetime
+                #{}
+                [[[19] [20] [21] [21]]
+                 [:get-minute [:field (mt/id :many-times :dt) nil]]]
+                [[[19 1] [20 1] [21 2]]
+                 [:get-minute [:field (mt/id :many-times :dt) nil]]
+                 {:aggregation [[:count]]
+                  :breakout    [[:expression "expr"]]}]]
 
-              [:get-minute
-               :text-as-datetime
-               #{:mongo}
-               [[[19] [20] [21] [21]]
-                [:get-minute [:field (mt/id :times :as_dt) nil]]]
-               [[[19 1] [20 1] [21 2]]
-                [:get-minute [:field (mt/id :times :as_dt) nil]]
-                {:aggregation [[:count]]
-                 :breakout    [[:expression "expr"]]}]]
+               [:get-minute
+                :text-as-datetime
+                #{:mongo}
+                [[[19] [20] [21] [21]]
+                 [:get-minute [:field (mt/id :many-times :as_dt) nil]]]
+                [[[19 1] [20 1] [21 2]]
+                 [:get-minute [:field (mt/id :many-times :as_dt) nil]]
+                 {:aggregation [[:count]]
+                  :breakout    [[:expression "expr"]]}]]
 
-              ;; get-second
-              [:get-second
-               :datetime
-               #{}
-               [[[9] [10] [11] [11]]
-                [:get-second [:field (mt/id :times :dt) nil]]]
-               [[[9 1] [10 1] [11 2]]
-                [:get-second [:field (mt/id :times :dt) nil]]
-                {:aggregation [[:count]]
-                 :breakout    [[:expression "expr"]]}]]
+;; get-second
+               [:get-second
+                :datetime
+                #{}
+                [[[9] [10] [11] [11]]
+                 [:get-second [:field (mt/id :many-times :dt) nil]]]
+                [[[9 1] [10 1] [11 2]]
+                 [:get-second [:field (mt/id :many-times :dt) nil]]
+                 {:aggregation [[:count]]
+                  :breakout    [[:expression "expr"]]}]]
 
-              [:get-second
-               :text-as-datetime
-               #{:mongo :presto :presto-jdbc}
-               [[[9] [10] [11] [11]]
-                [:get-second [:field (mt/id :times :as_dt) nil]]]
-               [[[9 1] [10 1] [11 2]]
-                [:get-second [:field (mt/id :times :as_dt) nil]]
-                {:aggregation [[:count]]
-                 :breakout    [[:expression "expr"]]}]]]]
-      (when-not (except-drivers driver/*driver*)
-        (testing (format "%s function works as expected on %s column for driver %s" operation col-type driver/*driver*)
-          (doseq [[expected expr more-clauses] tests]
-            (is (= (set expected) (set (test-date-extract expr more-clauses)))))))))))
+               [:get-second
+                :text-as-datetime
+                #{:mongo :presto :presto-jdbc}
+                [[[9] [10] [11] [11]]
+                 [:get-second [:field (mt/id :many-times :as_dt) nil]]]
+                [[[9 1] [10 1] [11 2]]
+                 [:get-second [:field (mt/id :many-times :as_dt) nil]]
+                 {:aggregation [[:count]]
+                  :breakout    [[:expression "expr"]]}]]]]
+       (when-not (except-drivers driver/*driver*)
+         (testing (format "%s function works as expected on %s column for driver %s" operation col-type driver/*driver*)
+           (doseq [[expected expr more-clauses] tests]
+             (is (= (set expected) (set (test-date-extract expr more-clauses)))))))))))
