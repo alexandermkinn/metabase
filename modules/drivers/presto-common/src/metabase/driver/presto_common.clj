@@ -87,6 +87,14 @@
   (sql.qp/cast-temporal-string driver :Coercion/YYYYMMDDHHMMSSString->Temporal
     (hsql/call :from_utf8 expr)))
 
+(defmethod sql.qp/cast-temporal-string [:presto-common :Coercion/ISO8601->DateTime]
+  [_ _coercion-strategy expr]
+  (hsql/call :from_iso8601_timestamp expr))
+
+(defmethod sql.qp/cast-temporal-string [:presto-common :Coercion/ISO8601->Date]
+  [_ _coercion-strategy expr]
+  (hsql/call :from_iso8601_date expr))
+
 (defmethod sql.qp/->honeysql [:presto-common Boolean]
   [_ bool]
   (hsql/raw (if bool "TRUE" "FALSE")))
