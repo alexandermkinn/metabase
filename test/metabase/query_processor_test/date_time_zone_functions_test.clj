@@ -23,20 +23,20 @@
          (mt/formatted-rows [int]))))
 
 (mt/defdataset many-times-2
-  [["times" [{:field-name "index"
-              :base-type :type/Integer}
-             {:field-name "dt"
-              :base-type :type/DateTime}
-             {:field-name "d"
-              :base-type :type/Date}
-             {:field-name "as_dt"
-              :base-type :type/Text
-              :effective-type :type/DateTime
-              :coercion-strategy :Coercion/ISO8601->DateTime}
-             {:field-name "as_d"
-              :base-type :type/Text
-              :effective-type :type/Date
-              :coercion-strategy :Coercion/ISO8601->Date}]
+  [["many-times" [{:field-name "index"
+                   :base-type :type/Integer}
+                  {:field-name "dt"
+                   :base-type :type/DateTime}
+                  {:field-name "d"
+                   :base-type :type/Date}
+                  {:field-name "as_dt"
+                   :base-type :type/Text
+                   :effective-type :type/DateTime
+                   :coercion-strategy :Coercion/ISO8601->DateTime}
+                  {:field-name "as_d"
+                   :base-type :type/Text
+                   :effective-type :type/Date
+                   :coercion-strategy :Coercion/ISO8601->Date}]
     [[1 #t "2004-02-19T09:19:09" #t "2004-02-19" "2004-02-19T09:19:09" "2004-02-19"]
      [2 #t "2008-06-20T10:20:10" #t "2008-06-20" "2008-06-20T10:20:10" "2008-06-20"]
      [3 #t "2012-11-21T11:21:11" #t "2012-11-21" "2012-11-21T11:21:11" "2012-11-21"]
