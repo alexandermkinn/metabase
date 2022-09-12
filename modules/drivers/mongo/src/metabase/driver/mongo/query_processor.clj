@@ -200,21 +200,21 @@
       (letfn [(truncate [unit]
                 (truncate-to-resolution column unit))]
         (case unit
-          :default        column
+          :default          column
           :second-of-minute {$second column}
-          :minute         (truncate :minute)
-          :minute-of-hour {$minute column}
-          :hour           (truncate :hour)
-          :hour-of-day    {$hour column}
-          :day            (truncate :day)
-          :day-of-week    (day-of-week column)
-          :day-of-month   {$dayOfMonth column}
-          :day-of-year    {$dayOfYear column}
-          :week           (truncate-to-resolution (week column) :day)
-          :week-of-year   {:$ceil {$divide [{$dayOfYear (week column)}
-                                            7.0]}}
-          :month          (truncate :month)
-          :month-of-year  {$month column}
+          :minute           (truncate :minute)
+          :minute-of-hour   {$minute column}
+          :hour             (truncate :hour)
+          :hour-of-day      {$hour column}
+          :day              (truncate :day)
+          :day-of-week      (day-of-week column)
+          :day-of-month     {$dayOfMonth column}
+          :day-of-year      {$dayOfYear column}
+          :week             (truncate-to-resolution (week column) :day)
+          :week-of-year     {:$ceil {$divide [{$dayOfYear (week column)}
+                                              7.0]}}
+          :month            (truncate :month)
+          :month-of-year    {$month column}
           ;; For quarter we'll just subtract enough days from the current date to put it in the correct month and
           ;; stringify it as yyyy-MM Subtracting (($dayOfYear(column) % 91) - 3) days will put you in correct month.
           ;; Trust me.
@@ -382,7 +382,6 @@
 (defmethod ->rvalue :replace   [[_ & args]] {"$replaceAll" (mapv ->rvalue args)})
 (defmethod ->rvalue :concat    [[_ & args]] {"$concat" (mapv ->rvalue args)})
 (defmethod ->rvalue :substring [[_ & args]] {"$substrCP" (mapv ->rvalue args)})
-
 
 (defmethod ->rvalue :get-year        [[_ inp]] (with-rvalue-temporal-bucketing (->rvalue inp) :yyear))
 (defmethod ->rvalue :get-quarter     [[_ inp]] (with-rvalue-temporal-bucketing (->rvalue inp) :quarter-of-year))
