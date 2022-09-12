@@ -22,9 +22,9 @@
                                         :fields      fields})
          (mt/formatted-rows [int]))))
 
-(mt/defdataset many-times-2
+(mt/defdataset many-times-3
   [["times" [{:field-name "index"
-                   :base-type :type/Integer}
+              :base-type :type/Integer}
              {:field-name "dt"
               :base-type :type/DateTime}
              {:field-name "d"
@@ -37,14 +37,15 @@
               :base-type :type/Text
               :effective-type :type/Date
               :coercion-strategy :Coercion/ISO8601->Date}]
-    [[1 #t "2004-02-19 09:19:09" #t "2004-02-19" "2004-02-19 09:19:09" "2004-02-19"]
-     [2 #t "2008-06-20 10:20:10" #t "2008-06-20" "2008-06-20 10:20:10" "2008-06-20"]
-     [3 #t "2012-11-21 11:21:11" #t "2012-11-21" "2012-11-21 11:21:11" "2012-11-21"]
-     [4 #t "2012-11-21 11:21:11" #t "2012-11-21" "2012-11-21 11:21:11" "2012-11-21"]]]])
+    [[1 #t "2004-02-19T09:19:09" #t "2004-02-19" "2004-02-19T09:19:09" "2004-02-19"]
+     [2 #t "2008-06-20T10:20:10" #t "2008-06-20" "2008-06-20T10:20:10" "2008-06-20"]
+     [3 #t "2012-11-21T11:21:11" #t "2012-11-21" "2012-11-21T11:21:11" "2012-11-21"]
+     [4 #t "2012-11-21T11:21:11" #t "2012-11-21" "2012-11-21T11:21:11" "2012-11-21"]]]])
 
 (deftest extraction-function-tests
+  ;(mt/test-drivers #{:presto-jdbc}
   (mt/test-drivers (mt/normal-drivers-with-feature :date-functions)
-    (mt/dataset many-times-2
+    (mt/dataset many-times-3
       (doseq [[operation col-type except-drivers & tests]
               ;; get-year
               [[:get-year

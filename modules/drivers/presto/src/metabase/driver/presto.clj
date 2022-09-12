@@ -24,6 +24,14 @@
 
 (driver/register! :presto, :parent :presto-common)
 
+(defmethod sql.qp/cast-temporal-string [:presto :Coercion/ISO8601->DateTime]
+  [_ _coercion-strategy expr]
+  (hsql/call :from_iso8601_timestamp expr))
+
+(defmethod sql.qp/cast-temporal-string [:presto :Coercion/ISO8601->Date]
+  [_ _coercion-strategy expr]
+  (hsql/call :from_iso8601_date expr))
+
 ;;; Presto API helpers
 
 (def ^:private PrestoConnectionDetails
