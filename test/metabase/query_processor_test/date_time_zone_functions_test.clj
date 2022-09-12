@@ -37,10 +37,10 @@
               :base-type :type/Text
               :effective-type :type/Date
               :coercion-strategy :Coercion/ISO8601->Date}]
-    [[1 #t "2004-02-19 09:19:09" #t "2004-02-19" "2004-02-19 09:19:09" "2004-02-19"]
-     [2 #t "2008-06-20 10:20:10" #t "2008-06-20" "2008-06-20 10:20:10" "2008-06-20"]
-     [3 #t "2012-11-21 11:21:11" #t "2012-11-21" "2012-11-21 11:21:11" "2012-11-21"]
-     [4 #t "2012-11-21 11:21:11" #t "2012-11-21" "2012-11-21 11:21:11" "2012-11-21"]]]])
+    [[1 #t "2004-02-19T09:19:09" #t "2004-02-19" "2004-02-19T09:19:09" "2004-02-19"]
+     [2 #t "2008-06-20T10:20:10" #t "2008-06-20" "2008-06-20T10:20:10" "2008-06-20"]
+     [3 #t "2012-11-21T11:21:11" #t "2012-11-21" "2012-11-21T11:21:11" "2012-11-21"]
+     [4 #t "2012-11-21T11:21:11" #t "2012-11-21" "2012-11-21T11:21:11" "2012-11-21"]]]])
 
 (deftest extraction-function-tests
   (mt/test-drivers (mt/normal-drivers-with-feature :date-functions)
@@ -69,7 +69,7 @@
 
               [:get-year
                :text-as-datetime
-               #{:mongo :presto :presto-jdbc}
+               #{:mongo}
                [[[2004] [2008] [2012] [2012]]
                 [:get-year [:field (mt/id :times :as_dt) nil]]]
                [[[2004 1] [2008 1] [2012 2]]
@@ -79,7 +79,7 @@
 
               [:get-year
                :text-as-date
-               #{:mongo :presto :presto-jdbc}
+               #{:mongo}
                [[[2004] [2008] [2012] [2012]]
                 [:get-year [:field (mt/id :times :as_d) nil]]]
                [[[2004 1] [2008 1] [2012 2]]
@@ -110,7 +110,7 @@
 
               [:get-quarter
                :text-as-datetime
-               #{:mongo :presto :presto-jdbc}
+               #{:mongo}
                [[[1] [2] [4] [4]]
                 [:get-quarter [:field (mt/id :times :as_dt) nil]]]
                [[[1 1] [2 1] [4 2]]
@@ -120,7 +120,7 @@
 
               [:get-quarter
                :text-as-date
-               #{:mongo :presto :presto-jdbc}
+               #{:mongo}
                [[[1] [2] [4] [4]]
                 [:get-quarter [:field (mt/id :times :as_d) nil]]]
                [[[1 1] [2 1] [4 2]]
@@ -151,7 +151,7 @@
 
               [:get-month
                :text-as-datetime
-               #{:mongo :presto :presto-jdbc}
+               #{:mongo}
                [[[2] [6] [11] [11]]
                 [:get-month [:field (mt/id :times :as_dt) nil]]]
                [[[2 1] [6 1] [11 2]]
@@ -161,7 +161,7 @@
 
               [:get-month
                :text-as-date
-               #{:mongo :presto :presto-jdbc}
+               #{:mongo}
                [[[2] [6] [11] [11]]
                 [:get-month [:field (mt/id :times :as_d) nil]]]
                [[[2 1] [6 1] [11 2]]
@@ -192,7 +192,7 @@
 
               [:get-day
                :text-as-datetime
-               #{:mongo :presto :presto-jdbc}
+               #{:mongo}
                [[[19] [20] [21] [21]]
                 [:get-day [:field (mt/id :times :as_dt) nil]]]
                [[[19 1] [20 1] [21 2]]
@@ -202,7 +202,7 @@
 
               [:get-day
                :text-as-date
-               #{:mongo :presto :presto-jdbc}
+               #{:mongo}
                [[[19] [20] [21] [21]]
                 [:get-day [:field (mt/id :times :d) nil]]]
                [[[19 1] [20 1] [21 2]]
@@ -233,7 +233,7 @@
 
               [:get-day-of-week
                :text-as-datetime
-               #{:mongo :presto :presto-jdbc}
+               #{:mongo}
                [[[5] [6] [4] [4]]
                 [:get-day-of-week [:field (mt/id :times :as_dt) nil]]]
                [[[4 2] [5 1] [6 1]]
@@ -243,7 +243,7 @@
 
               [:get-day-of-week
                :text-as-date
-               #{:mongo :presto :presto-jdbc}
+               #{:mongo}
                [[[5] [6] [4] [4]]
                 [:get-day-of-week [:field (mt/id :times :as_d) nil]]]
                [[[4 2] [5 1] [6 1]]
@@ -264,7 +264,7 @@
 
               [:get-hour
                :text-as-datetime
-               #{:mongo :presto :presto-jdbc}
+               #{:mongo}
                [[[9] [10] [11] [11]]
                 [:get-hour [:field (mt/id :times :as_dt) nil]]]
                [[[9 1] [10 1] [11 2]]
@@ -285,7 +285,7 @@
 
               [:get-minute
                :text-as-datetime
-               #{:mongo :presto :presto-jdbc}
+               #{:mongo}
                [[[19] [20] [21] [21]]
                 [:get-minute [:field (mt/id :times :as_dt) nil]]]
                [[[19 1] [20 1] [21 2]]
