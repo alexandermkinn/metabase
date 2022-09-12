@@ -1,5 +1,5 @@
 (ns metabase.query-processor-test.date-time-zone-functions-test
-  (:require [clojure.test :as t]
+  (:require [clojure.test :refer :all]
             [metabase.driver :as driver]
             [metabase.test :as mt]
             [metabase.test.data :as data]
@@ -22,16 +22,13 @@
                                    :fields      fields})
          (mt/formatted-rows [int]))))
 
-(mt/defdataset many-times-1
+(mt/defdataset many-times-2
   [["times" [{:field-name "index"
-              :effective-type :type/Integer
-              :base-type :type/Text}
+              :base-type :type/Integer}
              {:field-name "dt"
               :base-type :type/DateTime}
              {:field-name "d"
               :base-type :type/Date}
-             #_{:field-name "t"
-                :base-type :type/Time}
              {:field-name "as_dt"
               :base-type :type/Text
               :effective-type :type/DateTime
@@ -39,23 +36,15 @@
              {:field-name "as_d"
               :base-type :type/Text
               :effective-type :type/Date
-              :coercion-strategy :Coercion/ISO8601->Date}
-             #_{:field-name "as_t"
-                :base-type :type/Text
-                :effective-type :type/Time
-                :coercion-strategy :Coercion/ISO8601->Time}]
-    #_[[1 #t "2004-02-19 09:19:09" #t "2004-02-19" #t "09:19:09" "2004-02-19 09:19:09" "2004-02-19" "09:19:09"]
-       [2 #t "2008-06-20 10:20:10" #t "2008-06-20" #t "10:20:10" "2008-06-20 10:20:10" "2008-06-20" "10:20:10"]
-       [3 #t "2012-11-21 11:21:11" #t "2012-11-21" #t "11:21:11" "2012-11-21 11:21:11" "2012-11-21" "11:21:11"]
-       [4 #t "2012-11-21 11:21:11" #t "2012-11-21" #t "11:21:11" "2012-11-21 11:21:11" "2012-11-21" "11:21:11"]]
+              :coercion-strategy :Coercion/ISO8601->Date}]
     [[1 #t "2004-02-19 09:19:09" #t "2004-02-19" "2004-02-19 09:19:09" "2004-02-19"]
      [2 #t "2008-06-20 10:20:10" #t "2008-06-20" "2008-06-20 10:20:10" "2008-06-20"]
      [3 #t "2012-11-21 11:21:11" #t "2012-11-21" "2012-11-21 11:21:11" "2012-11-21"]
      [4 #t "2012-11-21 11:21:11" #t "2012-11-21" "2012-11-21 11:21:11" "2012-11-21"]]]])
 
-(t/deftest extraction-function-tests
+(deftest extraction-function-tests
   (mt/test-drivers (mt/normal-drivers-with-feature :date-functions)
-    (mt/dataset many-times-1
+    (mt/dataset many-times-2
       (doseq [[operation col-type drivers & tests]
               ;; get-year
               [[:get-year
@@ -385,6 +374,6 @@
                    {:aggregation [[:count]]
                     :breakout    [[:expression "expr"]]}]]]]
        (when (or (= drivers :all) (drivers driver/*driver*))
-         (t/testing (format "%s function works as expected on %s column for driver %s" operation col-type drivers)
+         (testing (format "%s function works as expected on %s column for driver %s" operation col-type drivers)
            (doseq [[expected expr more-clauses] tests]
-             (t/is (= (set expected) (set (test-date-extract expr more-clauses)))))))))))
+             (is (= (set expected) (set (test-date-extract expr more-clauses)))))))))))
